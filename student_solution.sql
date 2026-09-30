@@ -1,32 +1,28 @@
 USE CollegeDB;
 
 CREATE TABLE Department (
-    department_id INT PRIMARY KEY,
-    department_name VARCHAR(100)
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50)
 );
+
+INSERT INTO Department (DepartmentID, DepartmentName) VALUES
+(101, 'Computer Science'),
+(102, 'Mathematics'),
+(103, 'Physics');
 
 CREATE TABLE Student (
-    student_id INT PRIMARY KEY,
-    student_name VARCHAR(100),
-    department_id INT,
-    FOREIGN KEY (department_id) REFERENCES Department(department_id)
+    StudentID INT PRIMARY KEY,
+    StudentName VARCHAR(50),
+    DepartmentID INT
 );
 
-INSERT INTO Department (department_id, department_name) VALUES
-(1, 'Computer Science'),
-(2, 'Commerce'),
-(3, 'Mathematics');
+INSERT INTO Student (StudentID, StudentName, DepartmentID) VALUES
+(1001, 'Arun', 101),
+(1002, 'Divya', 102),
+(1003, 'Karthik', 101),
+(1004, 'Nisha', 103);
 
-INSERT INTO Student (student_id, student_name, department_id) VALUES
-(101, 'John', 1),
-(102, 'David', 2),
-(103, 'Alex', 1),
-(104, 'Sam', 3);
-
-SELECT 
-    s.student_id,
-    s.student_name,
-    d.department_name
-FROM Student s
-INNER JOIN Department d
-ON s.department_id = d.department_id;
+SELECT Student.StudentName, Department.DepartmentName
+FROM Student
+INNER JOIN Department
+ON Student.DepartmentID = Department.DepartmentID;
